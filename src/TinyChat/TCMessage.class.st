@@ -22,7 +22,9 @@ TCMessage class >> fromString: aString [
 	
 	result := aString trimmed splitOn: self separator.
 	
-	^ self from: (result at: 1) text: (result at: 2)
+	^ ( result size == 2 ) 
+		ifTrue: [ self from: (result at: 1) text: (result at: 2) ] 
+		ifFalse: [ self new ]
 ]
 
 { #category : #private }
@@ -47,11 +49,14 @@ TCMessage >> initialize [
 
 { #category : #printing }
 TCMessage >> printOn: aStream [
-	aStream
-		<< sender; 
-		<< self class separator;
-		<< text; 
-		<< String crlf
+	sender ifNotEmpty: [ 
+		aStream
+			<< sender; 
+			<< self class separator;
+			<< text; 
+			<< String crlf ].
+
+	
 ]
 
 { #category : #private }

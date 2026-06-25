@@ -58,7 +58,7 @@ TCServer >> messageCount [
 ]
 
 { #category : #private }
-TCServer >> messageFrom: aRequest [
+TCServer >> messagesFrom: aRequest [
 
 	^ messageQueue messagesFrom: ( aRequest at: #id ).
 ]
